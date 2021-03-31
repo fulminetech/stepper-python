@@ -1,52 +1,91 @@
 from gpiozero import LED, PWMLED
 import time
 
-direction = LED(pin=19, active_high=False, initial_value=1)  # Black
-enable = LED(pin=20, active_high=False, initial_value=1) # White
-step = PWMLED(pin=21, active_high=False, initial_value=1, frequency=600) # Gray 
+# pps to rpm conversion
+# Full Step 1.8° → 1000 pps / 200 Steps = 5 Rev. per Second x 60 = 300 RPM
 
-# Data format: Dictonary
 payload = {
     'connection': True,
     'status': "IDLE",
-    'direction': "Forward",
-    'pps': 0,
-    'timer1': 10,
-    'timer2': 2
+    'pps_fwd': 500, # forward speed
+    'pps_rev': 1000,  # reverse speed
+    'fwd_timer': 10, # forward run
+    'rev_timer': 10, # reverse run
+    'fwd_halt': 2, # wait after running forward
+    'rev_halt': 20,  # wait after running reverse
+    'counter': 0
 }
+
+# GPIO config
+global step
+
+direction = LED(pin=19, active_high=False, initial_value=1)  # Black
+enable = LED(pin=20, active_high=False, initial_value=1)  # White
+step = PWMLED(pin=21, active_high=False, initial_value=1,
+              frequency=payload['pps_fwd'])  # Gray
 
 # Current time: print(time.strftime("%H:%M:%S", time.localtime()))
 
-def runforward():
-    print("Forward")
+def forward():
+    payload['status'] = "forward"
     direction.off()
     enable.on()
     step.value = 0.5  # 50% of frequency
-    print(time.strftime("%H:%M:%S", time.localtime()))
-    time.sleep(payload['timer1'])
-    print(time.strftime("%H:%M:%S", time.localtime()))
+
+def stop():
+    payload['status'] = "stop"
     step.value = 0  # Off
     enable.off()
+    direction.off()
 
+def reverse():
+    if payload['status'] != "forward":
+        payload['status'] = "reverse"
+        direction.on()
+        enable.on()
+        step.value = 0.5  # 50% of frequency
+
+def runforward():
+    step = PWMLED(pin=21, active_high=False, initial_value=1,
+                  frequency=payload['pps_fwd'])  # Gray
+    forward()
+    time.sleep(payload['fwd_timer'])
+    stop()
+    payload['status'] = "IDLE"
 
 def runreverse():
-    print("Reverse")
-    direction.on()
-    enable.on()
-    step.value = 0.5  # 50% of frequency
-    print(time.strftime("%H:%M:%S", time.localtime()))
-    time.sleep(payload['timer1'])
-    print(time.strftime("%H:%M:%S", time.localtime()))
-    step.value = 0  # Off
-    enable.off()
-    direction.off()
+    step = PWMLED(pin=21, active_high=False, initial_value=1,
+                  frequency=payload['pps_rev'])  # Gray
+    forward()
+    time.sleep(payload['rev_timer'])
+    stop()
+    payload['status'] = "IDLE"
+
+def loop():
+    payload['status'] = "looping"
+    counter = payload['counter']
+    if counter > 0:
+        -counter
+        runforward()
+        time.sleep(payload['fwd_halt'])
+        runreverse()
+        time.sleep(payload['rev_halt'])
+    else:
+        payload['status'] = "IDLE"
 
 # Main
 if __name__ == '__main__':
     format = "%(asctime)s: %(message)s"
-    runforward()
-    print("Waiting for 10 seconds")
-    time.sleep(payload['timer2'])
-    runreverse()
-    # print("Waiting for 10 seconds")
-    # time.sleep(payload['timer2'])
+    forward()
+    print("forward")
+    time.sleep(10)
+    stop()
+    print("stop")
+    time.sleep(5)
+    reverse()
+    print("reverse")
+    time.sleep(10)
+    stop()
+    print("stop")
+    
+    
