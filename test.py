@@ -4,7 +4,9 @@ import time
 # pps to rpm conversion
 # Full Step 1.8° → 1000 pps / 200 Steps = 5 Rev. per Second x 60 = 300 RPM
 
-# Note Speed Range: 100 - 1000
+# Note Speed Range: 0 - 1000
+# DIP Setting: 1OFF 2ON 3OFF 4OFF 5OFF 6OFF
+
 payload = {
     'connection': True,
     'status': "IDLE",
@@ -15,7 +17,7 @@ payload = {
     'fwd_halt': 2, # wait after running forward
     'rev_halt': 5,  # wait after running reverse
     'counter_set': 5,
-    'counter_actual': 5
+    'counter_actual': 0
 }
 
 # GPIO config
