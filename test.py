@@ -2,7 +2,7 @@ from gpiozero import LED, PWMLED
 import time
 
 direction = LED(19) # Black
-enable = LED(20) # White
+enable = LED(pin=20, active_high=False, initial_value=1) # White
 step = PWMLED(pin=21, active_high=True, initial_value=0, frequency=500) # Gray 
 
 # Data format: Dictonary
