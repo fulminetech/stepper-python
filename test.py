@@ -13,7 +13,7 @@ payload = {
     'rev_timer': 10, # reverse run
     'fwd_halt': 2, # wait after running forward
     'rev_halt': 20,  # wait after running reverse
-    'counter': 0
+    'counter': 5
 }
 
 # GPIO config
@@ -63,6 +63,7 @@ def loop():
     payload['status'] = "looping"
     counter = payload['counter']
     if counter > 0:
+        print(counter)
         -counter
         runforward()
         time.sleep(payload['fwd_halt'])
@@ -74,10 +75,7 @@ def loop():
 # Main
 if __name__ == '__main__':
     format = "%(asctime)s: %(message)s"
-    runforward()
-    time.sleep(10)
-    runreverse()
-    time.sleep(10)
+    loop()
     
     # print("forward")
     # # stop()
