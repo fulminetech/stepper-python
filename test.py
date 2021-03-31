@@ -7,8 +7,8 @@ import time
 payload = {
     'connection': True,
     'status': "IDLE",
-    'pps_fwd': 1500, # forward speed
-    'pps_rev': 1500,  # reverse speed
+    'pps_fwd': 1200, # forward speed
+    'pps_rev': 1200,  # reverse speed
     'fwd_timer': 10, # forward run
     'rev_timer': 10, # reverse run
     'fwd_halt': 2, # wait after running forward
