@@ -1,9 +1,9 @@
 from gpiozero import LED, PWMLED
 import time
 
-direction = LED(19)
-enable = LED(20)
-step = PWMLED(pin=21, active_high=True, initial_value=0, frequency=500)
+direction = LED(19) # Black
+enable = LED(20) # White
+step = PWMLED(pin=21, active_high=True, initial_value=0, frequency=500) # Gray 
 
 # Data format: Dictonary
 payload = {
@@ -19,7 +19,7 @@ t = time.localtime()
 current_time = time.strftime("%H:%M:%S", t)
 
 def runforward():
-    print("Forward "+payload['timer1'])
+    print("Forward")
     direction.off()
     enable.on()
     time.sleep(1)
