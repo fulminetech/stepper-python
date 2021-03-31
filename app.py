@@ -130,8 +130,8 @@ class Payload(Resource):
             runreverse()
             return payload
         if subsection == "loop":
+            return "looping"
             loop()
-            return payload
         else:
             return "Invalid Command"
 
