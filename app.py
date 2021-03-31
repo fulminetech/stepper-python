@@ -106,4 +106,4 @@ api.add_resource(Set, '/set/<parameter>/<frequency>/<timer1>')
 # Start Server
 if __name__ == '__main__':
     format = "%(asctime)s: %(message)s"
-    app.run(debug=True)
+    app.run(debug=True, host="0.0.0.0")
