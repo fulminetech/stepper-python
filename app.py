@@ -114,6 +114,24 @@ class Payload(Resource):
     def get(self, subsection):
         if subsection == "status":
             return payload
+        if subsection == "forward":
+            forward()
+            return payload
+        if subsection == "stop":
+            stop()
+            return payload
+        if subsection == "reverse":
+            reverse()
+            return payload
+        if subsection == "runforward":
+            runforward()
+            return payload
+        if subsection == "runreverse":
+            runreverse()
+            return payload
+        if subsection == "loop":
+            loop()
+            return payload
         else:
             return "Invalid Command"
 
