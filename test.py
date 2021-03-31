@@ -3,7 +3,7 @@ import time
 
 direction = LED(pin=19, active_high=False, initial_value=1)  # Black
 enable = LED(pin=20, active_high=False, initial_value=1) # White
-step = PWMLED(pin=21, active_high=False, initial_value=1, frequency=6000) # Gray 
+step = PWMLED(pin=21, active_high=False, initial_value=1, frequency=4000) # Gray 
 
 # Data format: Dictonary
 payload = {
@@ -21,7 +21,11 @@ def runforward():
     print("Forward")
     direction.off()
     enable.on()
+    step.value = 0.2  # 50% of frequency
+    time.sleep(1)
     step.value = 0.5  # 50% of frequency
+    time.sleep(1)
+    step.value = 0.7  # 50% of frequency
     print(time.strftime("%H:%M:%S", time.localtime()))
     time.sleep(payload['timer1'])
     print(time.strftime("%H:%M:%S", time.localtime()))
