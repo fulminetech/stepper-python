@@ -1,4 +1,5 @@
 from gpiozero import LED, PWMLED
+import time
 
 direction = LED(19)
 enable = LED(20)
@@ -18,9 +19,9 @@ payload = {
 def runforward():
     direction.off()
     enable.on()
-    sleep(1)
+    time.sleep(1)
     step.value = 0.5  # 50% of frequency
-    sleep(payload['timer1'])
+    time.sleep(payload['timer1'])
     step.value = 0  # Off
     enable.off()
 
