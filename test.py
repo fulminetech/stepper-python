@@ -21,10 +21,13 @@ def runforward():
     print("Forward")
     direction.off()
     enable.on()
+    print("0.2")
     step.value = 0.2  # 50% of frequency
-    time.sleep(1)
+    time.sleep(2)
+    print("0.5")
     step.value = 0.5  # 50% of frequency
-    time.sleep(1)
+    time.sleep(2)
+    print("0.7")
     step.value = 0.7  # 50% of frequency
     print(time.strftime("%H:%M:%S", time.localtime()))
     time.sleep(payload['timer1'])
