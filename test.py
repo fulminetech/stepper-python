@@ -3,7 +3,7 @@ import time
 
 direction = LED(pin=19, active_high=False, initial_value=1)  # Black
 enable = LED(pin=20, active_high=False, initial_value=1) # White
-step = PWMLED(pin=21, active_high=False, initial_value=1, frequency=3000) # Gray 
+step = PWMLED(pin=21, active_high=False, initial_value=1, frequency=4000) # Gray 
 
 # Data format: Dictonary
 payload = {
@@ -48,4 +48,5 @@ if __name__ == '__main__':
     print("Waiting for 10 seconds")
     time.sleep(payload['timer2'])
     runreverse()
+    print("Waiting for 10 seconds")
     time.sleep(payload['timer2'])
