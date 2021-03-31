@@ -64,7 +64,7 @@ def loop():
     counter = payload['counter']
     while counter > 0:
         print(counter)
-        -counter
+        counter -= 1
         runforward()
         time.sleep(payload['fwd_halt'])
         runreverse()
