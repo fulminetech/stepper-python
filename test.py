@@ -7,8 +7,8 @@ import time
 payload = {
     'connection': True,
     'status': "IDLE",
-    'pps_fwd': 400, # forward speed
-    'pps_rev': 400,  # reverse speed
+    'pps_fwd': 1000, # forward speed
+    'pps_rev': 1000,  # reverse speed
     'fwd_timer': 10, # forward run
     'rev_timer': 10, # reverse run
     'fwd_halt': 2, # wait after running forward
@@ -30,7 +30,7 @@ def forward():
     step.frequency = payload['pps_fwd']
     direction.off()
     enable.on()
-    step.value = 1  # 50% of frequency
+    step.value = 0.5  # 50% of frequency
 
 def stop():
     step.value = 0  # Off
@@ -44,7 +44,7 @@ def reverse():
         payload['status'] = "reverse"
         direction.on()
         enable.on()
-        step.value = 1  # 50% of frequency
+        step.value = 0.5  # 50% of frequency
 
 def runforward():
     forward()
