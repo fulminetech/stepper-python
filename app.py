@@ -84,9 +84,28 @@ def loop():
         payload['status'] = "IDLE"
         
 class Set(Resource):
-    def get(self, parameter, frequency, timer1):
-        if parameter == "forward":
+    def get(self, parameter, value):
+        if parameter == "pps_fwd":
+            payload['pps_fwd'] = value
             print("fwd")
+        elif parameter == "pps_rev":
+            payload['pps_rev'] = value
+            return payload
+        elif parameter == "fwd_timer":
+            payload['fwd_timer'] = value
+            return payload
+        elif parameter == "rev_timer":
+            payload['rev_timer'] = value
+            return payload
+        elif parameter == "fwd_halt":
+            payload['fwd_halt'] = value
+            return payload
+        elif parameter == "rev_halt":
+            payload['rev_halt'] = value
+            return payload
+        elif parameter == "counter_set":
+            payload['counter_set'] = value
+            return payload
         else:
             return "Invalid Command"
 
@@ -101,7 +120,7 @@ class Payload(Resource):
 # API Declaration
 api.add_resource(Payload, '/stepper/<subsection>')
 
-api.add_resource(Set, '/set/<parameter>/<frequency>/<timer1>')
+api.add_resource(Set, '/set/<parameter>/<value>')
 
 # Start Server
 if __name__ == '__main__':
