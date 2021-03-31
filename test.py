@@ -33,13 +33,13 @@ def forward():
     step.value = 0.5  # 50% of frequency
 
 def stop():
-    payload['status'] = "stop"
+    payload['status'] = "IDLE"
     step.value = 0  # Off
     enable.off()
     direction.off()
 
 def reverse():
-    if payload['status'] != "forward":
+    if payload['status'] == "IDLE":
         payload['status'] = "reverse"
         direction.on()
         enable.on()
@@ -79,7 +79,7 @@ if __name__ == '__main__':
     forward()
     print("forward")
     time.sleep(10)
-    stop()
+    # stop()
     print("stop")
     time.sleep(5)
     reverse()
