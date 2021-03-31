@@ -78,4 +78,4 @@ def loop():
 # Main
 if __name__ == '__main__':
     format = "%(asctime)s: %(message)s"
-    loop()
+    
