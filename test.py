@@ -11,16 +11,20 @@ payload = {
     'status': "IDLE",
     'direction': "Forward",
     'pps': 0,
-    'timer1': 100,
+    'timer1': 20,
     'timer2': 0
 }
 
+t = time.localtime()
+current_time = time.strftime("%H:%M:%S", t)
 
 def runforward():
+    print("Forward "+payload['timer1'])
     direction.off()
     enable.on()
     time.sleep(1)
     step.value = 0.5  # 50% of frequency
+    print(current_time)
     time.sleep(payload['timer1'])
     step.value = 0  # Off
     enable.off()
