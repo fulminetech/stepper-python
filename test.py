@@ -28,35 +28,33 @@ step = PWMLED(pin=21, active_high=False, initial_value=1,
 
 def forward():
     payload['status'] = "forward"
+    step.frequency = payload['pps_fwd']
     direction.off()
     enable.on()
     step.value = 0.5  # 50% of frequency
 
 def stop():
-    payload['status'] = "IDLE"
     step.value = 0  # Off
     enable.off()
     direction.off()
+    payload['status'] = "IDLE"
 
 def reverse():
     if payload['status'] == "IDLE":
+        step.frequency = payload['pps_rev']
         payload['status'] = "reverse"
         direction.on()
         enable.on()
         step.value = 0.5  # 50% of frequency
 
 def runforward():
-    step.frequency = 1000
-    # payload['pps_fwd'] = 5000
     forward()
     time.sleep(payload['fwd_timer'])
     stop()
     payload['status'] = "IDLE"
 
 def runreverse():
-    step = PWMLED(pin=21, active_high=False, initial_value=1,
-                  frequency=payload['pps_rev'])  # Gray
-    forward()
+    reverse()
     time.sleep(payload['rev_timer'])
     stop()
     payload['status'] = "IDLE"
@@ -77,9 +75,11 @@ def loop():
 if __name__ == '__main__':
     format = "%(asctime)s: %(message)s"
     runforward()
+    time.sleep(10)
+    runreverse()
+    time.sleep(10)
     
     # print("forward")
-    # time.sleep(10)
     # # stop()
     # print("stop")
     # time.sleep(5)
