@@ -3,7 +3,7 @@ import time
 
 direction = LED(pin=19, active_high=False, initial_value=1)  # Black
 enable = LED(pin=20, active_high=False, initial_value=1) # White
-step = PWMLED(pin=21, active_high=False, initial_value=1, frequency=6000) # Gray 
+step = PWMLED(pin=21, active_high=False, initial_value=1, frequency=600) # Gray 
 
 # Data format: Dictonary
 payload = {
