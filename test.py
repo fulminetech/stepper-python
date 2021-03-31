@@ -15,8 +15,8 @@ payload = {
     'timer2': 0
 }
 
-t = time.localtime()
-current_time = time.strftime("%H:%M:%S", t)
+# t = time.localtime()
+# current_time = time.strftime("%H:%M:%S", t)
 
 def runforward():
     print("Forward")
@@ -24,10 +24,9 @@ def runforward():
     enable.on()
     time.sleep(1)
     step.value = 0.5  # 50% of frequency
-    print(current_time)
+    print(time.localtime())
     time.sleep(payload['timer1'])
-    t = time.localtime()
-    print(current_time)
+    print(time.localtime())
     step.value = 0  # Off
     enable.off()
 
