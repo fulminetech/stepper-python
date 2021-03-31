@@ -22,7 +22,7 @@ payload = {
 
 # GPIO config
 direction = LED(pin=19, active_high=False, initial_value=1)  # Black
-enable = LED(pin=20, active_high=False, initial_value=1)  # White
+enable = LED(pin=20, active_high=False, initial_value=0)  # White
 step = PWMLED(pin=21, active_high=False, initial_value=1,
               frequency=payload['pps_fwd'])  # Gray
 
