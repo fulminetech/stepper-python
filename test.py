@@ -47,8 +47,6 @@ def reverse():
 
 def runforward():
     payload['pps_fwd'] = 5000
-    step = PWMLED(pin=21, active_high=False, initial_value=1,
-                  frequency=payload['pps_fwd'])  # Gray
     forward()
     time.sleep(payload['fwd_timer'])
     stop()
