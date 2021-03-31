@@ -86,25 +86,25 @@ def loop():
 class Set(Resource):
     def get(self, parameter, value):
         if parameter == "pps_fwd":
-            payload['pps_fwd'] = value
+            payload['pps_fwd'] = int(value)
             print("fwd")
         elif parameter == "pps_rev":
-            payload['pps_rev'] = value
+            payload['pps_rev'] = int(value)
             return payload
         elif parameter == "fwd_timer":
-            payload['fwd_timer'] = value
+            payload['fwd_timer'] = int(value)
             return payload
         elif parameter == "rev_timer":
-            payload['rev_timer'] = value
+            payload['rev_timer'] = int(value)
             return payload
         elif parameter == "fwd_halt":
-            payload['fwd_halt'] = value
+            payload['fwd_halt'] = int(value)
             return payload
         elif parameter == "rev_halt":
-            payload['rev_halt'] = value
+            payload['rev_halt'] = int(value)
             return payload
         elif parameter == "counter_set":
-            payload['counter_set'] = value
+            payload['counter_set'] = int(value)
             return payload
         else:
             return "Invalid Command"
