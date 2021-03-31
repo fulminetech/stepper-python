@@ -4,11 +4,12 @@ import time
 # pps to rpm conversion
 # Full Step 1.8° → 1000 pps / 200 Steps = 5 Rev. per Second x 60 = 300 RPM
 
+# Note Speed Range: 100 - 1000
 payload = {
     'connection': True,
     'status': "IDLE",
-    'pps_fwd': 1200, # forward speed
-    'pps_rev': 1200,  # reverse speed
+    'pps_fwd': 1000, # forward speed
+    'pps_rev': 1000,  # reverse speed
     'fwd_timer': 10, # forward run
     'rev_timer': 10, # reverse run
     'fwd_halt': 2, # wait after running forward
