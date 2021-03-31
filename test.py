@@ -15,7 +15,7 @@ payload = {
     'timer2': 10
 }
 
-current_time = time.strftime("%H:%M:%S", time.localtime())
+# Current time: print(time.strftime("%H:%M:%S", time.localtime()))
 
 def runforward():
     print("Forward")
@@ -23,9 +23,9 @@ def runforward():
     enable.on()
     time.sleep(1)
     step.value = 0.5  # 50% of frequency
-    print(current_time)
+    print(time.strftime("%H:%M:%S", time.localtime()))
     time.sleep(payload['timer1'])
-    print(current_time)
+    print(time.strftime("%H:%M:%S", time.localtime()))
     step.value = 0  # Off
     enable.off()
 
@@ -36,9 +36,9 @@ def runreverse():
     enable.on()
     time.sleep(1)
     step.value = 0.5  # 50% of frequency
-    print(current_time)
+    print(time.strftime("%H:%M:%S", time.localtime()))
     time.sleep(payload['timer1'])
-    print(current_time)
+    print(time.strftime("%H:%M:%S", time.localtime()))
     step.value = 0  # Off
     enable.off()
     direction.off()
@@ -46,7 +46,7 @@ def runreverse():
 # Main
 if __name__ == '__main__':
     format = "%(asctime)s: %(message)s"
-    # runforward()
-    # time.sleep(payload['timer2'])
+    runforward()
+    time.sleep(payload['timer2'])
     runreverse()
-    # time.sleep(payload['timer2'])
+    time.sleep(payload['timer2'])
