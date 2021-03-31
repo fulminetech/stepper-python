@@ -46,7 +46,8 @@ def reverse():
         step.value = 0.5  # 50% of frequency
 
 def runforward():
-    payload['pps_fwd'] = 5000
+    step.frequency = 5000
+    # payload['pps_fwd'] = 5000
     forward()
     time.sleep(payload['fwd_timer'])
     stop()
