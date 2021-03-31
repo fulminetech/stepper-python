@@ -7,7 +7,7 @@ import time
 payload = {
     'connection': True,
     'status': "IDLE",
-    'pps_fwd': 500, # forward speed
+    'pps_fwd': 1000, # forward speed
     'pps_rev': 1000,  # reverse speed
     'fwd_timer': 10, # forward run
     'rev_timer': 10, # reverse run
@@ -18,8 +18,6 @@ payload = {
 }
 
 # GPIO config
-global step
-
 direction = LED(pin=19, active_high=False, initial_value=1)  # Black
 enable = LED(pin=20, active_high=False, initial_value=1)  # White
 step = PWMLED(pin=21, active_high=False, initial_value=1,
@@ -32,7 +30,7 @@ def forward():
     step.frequency = payload['pps_fwd']
     direction.off()
     enable.on()
-    step.value = 0.5  # 50% of frequency
+    step.value = 1  # 50% of frequency
 
 def stop():
     step.value = 0  # Off
@@ -46,7 +44,7 @@ def reverse():
         payload['status'] = "reverse"
         direction.on()
         enable.on()
-        step.value = 0.5  # 50% of frequency
+        step.value = 1  # 50% of frequency
 
 def runforward():
     forward()
@@ -77,4 +75,4 @@ def loop():
 # Main
 if __name__ == '__main__':
     format = "%(asctime)s: %(message)s"
-    loop()
+    
