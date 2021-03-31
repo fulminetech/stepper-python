@@ -62,7 +62,7 @@ def runreverse():
 def loop():
     payload['status'] = "looping"
     counter = payload['counter']
-    if counter > 0:
+    while counter > 0:
         print(counter)
         -counter
         runforward()
